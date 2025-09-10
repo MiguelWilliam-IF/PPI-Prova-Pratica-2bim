@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Jogo - Gerenciamento de Futebol{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10 col-lg-8">
+        <div class="card">
+            <div class="card-header">
+                <h4><i class="fas fa-edit me-2"></i>Editar Jogo: {{ jogo.time_casa.nome }} vs {{ jogo.time_visitante.nome }}</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    {{ form.hidden_tag() }}
+
+                    <div class="mb-3">
+                        {{ form.data_hora.label(class="form-label") }}
+                        {{ form.data_hora(class="form-control", type="datetime-local") }}
+                        {% if form.data_hora.errors %}
+                            <div class="text-danger">
+                                {% for error in form.data_hora.errors %}
+                                    <small>{{ error }}</small>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.time_casa_id.label(class="form-label") }}
+                        {{ form.time_casa_id(class="form-select") }}
+                        {% if form.time_casa_id.errors %}
+                            <div class="text-danger">
+                                {% for error in form.time_casa_id.errors %}
+                                    <small>{{ error }}</small>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.time_visitante_id.label(class="form-label") }}
+                        {{ form.time_visitante_id(class="form-select") }}
+                        {% if form.time_visitante_id.errors %}
+                            <div class="text-danger">
+                                {% for error in form.time_visitante_id.errors %}
+                                    <small>{{ error }}</small>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.competicao_id.label(class="form-label") }}
+                        {{ form.competicao_id(class="form-select") }}
+                        {% if form.competicao_id.errors %}
+                            <div class="text-danger">
+                                {% for error in form.competicao_id.errors %}
+                                    <small>{{ error }}</small>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            {{ form.gols_casa.label(class="form-label") }}
+                            {{ form.gols_casa(class="form-control") }}
+                            {% if form.gols_casa.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.gols_casa.errors %}
+                                        <small>{{ error }}</small>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            {{ form.gols_visitante.label(class="form-label") }}
+                            {{ form.gols_visitante(class="form-control") }}
+                            {% if form.gols_visitante.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.gols_visitante.errors %}
+                                        <small>{{ error }}</small>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.status.label(class="form-label") }}
+                        {{ form.status(class="form-select") }}
+                        {% if form.status.errors %}
+                            <div class="text-danger">
+                                {% for error in form.status.errors %}
+                                    <small>{{ error }}</small>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <a href="{{ url_for('jogos_index') }}" class="btn btn-secondary">Cancelar</a>
+                        <button type="submit" class="btn btn-primary">Atualizar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

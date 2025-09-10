@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Treinadores - Gerenciamento de Futebol{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="fas fa-chalkboard-teacher me-2"></i>Treinadores</h2>
+    <a href="{{ url_for('treinadores_create') }}" class="btn btn-primary">
+        <i class="fas fa-plus me-2"></i>Novo Treinador
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        {% if treinadores %}
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Nome</th>
+                            <th>Idade</th>
+                            <th>Nacionalidade</th>
+                            <th>Experiência</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for treinador in treinadores %}
+                        <tr>
+                            <td><strong>{{ treinador.nome }}</strong></td>
+                            <td>{{ treinador.idade }}</td>
+                            <td>{{ treinador.nacionalidade }}</td>
+                            <td>{{ treinador.anos_experiencia }} anos</td>
+                            <td>
+                                <a href="{{ url_for('treinadores_edit', id=treinador.id) }}" class="btn btn-sm btn-warning me-1">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <form method="POST" action="{{ url_for('treinadores_delete', id=treinador.id) }}" class="d-inline">
+                                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                                    <button type="submit" class="btn btn-sm btn-danger"
+                                            onclick="return confirm('Tem certeza que deseja excluir este treinador?')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="text-center py-4">
+                <i class="fas fa-chalkboard-teacher fa-3x text-muted mb-3"></i>
+                <h5>Nenhum treinador cadastrado</h5>
+                <p class="text-muted">Cadastre o primeiro treinador para começar.</p>
+                <a href="{{ url_for('treinadores_create') }}" class="btn btn-primary">
+                    <i class="fas fa-plus me-2"></i>Cadastrar Treinador
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

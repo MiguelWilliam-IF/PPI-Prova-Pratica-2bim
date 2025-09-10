@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Competição - Gerenciamento de Futebol{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h4><i class="fas fa-edit me-2"></i>Editar Competição: {{ competicao.nome }}</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    {{ form.hidden_tag() }}
+
+                    <div class="mb-3">
+                        {{ form.nome.label(class="form-label") }}
+                        {{ form.nome(class="form-control") }}
+                        {% if form.nome.errors %}
+                            <div class="text-danger">
+                                {% for error in form.nome.errors %}
+                                    <small>{{ error }}</small>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.temporada.label(class="form-label") }}
+                        {{ form.temporada(class="form-control") }}
+                        {% if form.temporada.errors %}
+                            <div class="text-danger">
+                                {% for error in form.temporada.errors %}
+                                    <small>{{ error }}</small>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            {{ form.data_inicio.label(class="form-label") }}
+                            {{ form.data_inicio(class="form-control", type="date") }}
+                            {% if form.data_inicio.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.data_inicio.errors %}
+                                        <small>{{ error }}</small>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            {{ form.data_fim.label(class="form-label") }}
+                            {{ form.data_fim(class="form-control", type="date") }}
+                            {% if form.data_fim.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.data_fim.errors %}
+                                        <small>{{ error }}</small>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.descricao.label(class="form-label") }}
+                        {{ form.descricao(class="form-control", rows=3) }}
+                        {% if form.descricao.errors %}
+                            <div class="text-danger">
+                                {% for error in form.descricao.errors %}
+                                    <small>{{ error }}</small>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <a href="{{ url_for('competicoes_index') }}" class="btn btn-secondary">Cancelar</a>
+                        <button type="submit" class="btn btn-primary">Atualizar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

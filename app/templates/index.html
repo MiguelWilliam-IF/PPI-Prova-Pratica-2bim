@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="jumbotron bg-primary text-white rounded p-5 mb-4">
+    <h1 class="display-4">
+        <i class="fas fa-futbol me-3"></i>
+        Bem-vindo ao Gerenciamento de Futebol
+    </h1>
+    <p class="lead">Sistema completo para gerenciamento de times de futebol</p>
+</div>
+
+<!-- Estatísticas -->
+<div class="row g-4 mb-5">
+    <div class="col-md-6 col-lg-2">
+        <div class="card text-center bg-info text-white">
+            <div class="card-body">
+                <i class="fas fa-users fa-2x mb-2"></i>
+                <h3>{{ stats.times }}</h3>
+                <p>Times</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-2">
+        <div class="card text-center bg-success text-white">
+            <div class="card-body">
+                <i class="fas fa-running fa-2x mb-2"></i>
+                <h3>{{ stats.jogadores }}</h3>
+                <p>Jogadores</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-2">
+        <div class="card text-center bg-warning text-white">
+            <div class="card-body">
+                <i class="fas fa-clipboard-user fa-2x mb-2"></i>
+                <h3>{{ stats.treinadores }}</h3>
+                <p>Treinadores</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="card text-center bg-danger text-white">
+            <div class="card-body">
+                <i class="fas fa-trophy fa-2x mb-2"></i>
+                <h3>{{ stats.competicoes }}</h3>
+                <p>Competições</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="card text-center bg-secondary text-white">
+            <div class="card-body">
+                <i class="fas fa-calendar-alt fa-2x mb-2"></i>
+                <h3>{{ stats.jogos }}</h3>
+                <p>Jogos</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Links Rápidos -->
+<div class="row g-4">
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-users fa-3x text-primary mb-3"></i>
+                <h5>Gerenciar Times</h5>
+                <p>Cadastre e gerencie times de futebol</p>
+                <a href="{{ url_for('times_index') }}" class="btn btn-primary">Acessar</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-running fa-3x text-success mb-3"></i>
+                <h5>Gerenciar Jogadores</h5>
+                <p>Cadastre jogadores e associe aos times</p>
+                <a href="{{ url_for('jogadores_index') }}" class="btn btn-success">Acessar</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-calendar-alt fa-3x text-danger mb-3"></i>
+                <h5>Gerenciar Jogos</h5>
+                <p>Agende jogos e registre placares</p>
+                <a href="{{ url_for('jogos_index') }}" class="btn btn-danger">Acessar</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
