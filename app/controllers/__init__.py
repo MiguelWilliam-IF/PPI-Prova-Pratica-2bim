@@ -3,3 +3,4 @@ from .treinador_controller import TreinadorController
 from .time_controller import TimeController
 from .jogador_controller import JogadorController
 from .jogo_controller import JogoController
+from .classificacao_controller import ClassificacaoController
