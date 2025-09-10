@@ -238,3 +238,7 @@ def jogos_delete(id):
     else:
         flash('Erro ao excluir jogo.', 'danger')
     return redirect(url_for('jogos_index'))
+
+@app.route('/classificação', methods=['GET'])
+def classificacao():
+    pass
