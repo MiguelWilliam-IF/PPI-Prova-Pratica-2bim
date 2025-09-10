@@ -1,9 +1,23 @@
 from app import db
-from app.models.jogo import Jogo
 from app.controllers import JogoController
 from app.controllers import TimeController
 
 class ClassificacaoController:
+    def recuperar_informacoes_time(id): #NOME, QTD JOGOS DISPUTADOS, VITORIAS, EMPATES, DERROTAS, GOLS MARCADOS, GOLS SOFRIDOS, SALDO DE GOLS, PONTOS
+        dados = {
+            'nome': TimeController.recuperar_time(id=id).nome,
+            'jogos-disputados': 0,
+            'vitorias': 0,
+            'empates': 0,
+            'derrotas': 0,
+            'gols-marcados': 0,
+            'gols-sofridos': 0,
+            'gols-saldo': 0,
+            'pontos': ClassificacaoController.listar_dicionario_placar()[id]
+                 }
+
+        return dados
+
     def listar_dicionario_placar():
         jogos = JogoController.listar_jogos()
         pontos = {time.id: 0 for time in TimeController.listar_times()}
