@@ -243,5 +243,9 @@ def jogos_delete(id):
 def classificacao():
     print(ClassificacaoController.listar_dicionario_placar())
     print('======')
-    print(ClassificacaoController.recuperar_informacoes_time(1))
+    print(ClassificacaoController.recuperar_informacoes_classificacao(1))
     return 'oi'
+
+@app.route('/classificacao/<int:id>', methods=['GET'])
+def classificacao_checar(id):
+    return ClassificacaoController.recuperar_informacoes_classificacao(id=id)
