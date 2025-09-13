@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Classificação - Gerenciamento de futebol{% endblock %}
+
+{% block content %}
+
+<table class="table table-striped table-dark table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Lugar</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Jogos</th>
+      <th scope="col">VIT</th>
+      <th scope="col">EMP</th>
+      <th scope="col">DER</th>
+      <th scope="col">Gols Marcados</th>
+      <th scope="col">Gols Sofridos</th>
+      <th scope="col">Saldo de Gols</th>
+      <th scope="col">PONTOS</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for time in placar %}
+    <tr>
+      <th scope="row">{{ loop.index }}</th>
+      <td>{{ time['nome'] }}</td>
+      <td>{{ time['jogos-disputados'] }}</td>
+      <td>{{ time['vitorias'] }}</td>
+      <td>{{ time['empates'] }}</td>
+      <td>{{ time['derrotas'] }}</td>
+      <td>{{ time['gols-marcados'] }}</td>
+      <td>{{ time['gols-sofridos'] }}</td>
+      <td>{{ time['gols-saldo'] }}</td>
+      <td>{{ time['pontos'] }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

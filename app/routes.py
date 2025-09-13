@@ -241,11 +241,10 @@ def jogos_delete(id):
 
 @app.route('/classificacao', methods=['GET'])
 def classificacao():
+    '''
     print(ClassificacaoController.listar_dicionario_placar())
     print('======')
-    print(ClassificacaoController.recuperar_informacoes_classificacao(1))
-    return 'oi'
-
-@app.route('/classificacao/<int:id>', methods=['GET'])
-def classificacao_checar(id):
-    return ClassificacaoController.recuperar_informacoes_classificacao(id=id)
+    print(ClassificacaoController.recuperar_informacoes_classificacao())
+    '''
+    placar = ClassificacaoController.recuperar_informacoes_classificacao()
+    return render_template('classificacao/index.html', placar=placar)
