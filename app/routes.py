@@ -278,3 +278,10 @@ def login_usuario():
         else:
             flash("Usuário ou senha inválidos.", "error")
     return render_template('usuario/login.html', title='Login', form = formulario)
+
+@app.route('/logout')
+def logout():
+    success = AuthenticationController.logout()
+    if not success:
+        flash("Erro ao realizar logout.", "error")
+    return redirect(url_for('index'))
