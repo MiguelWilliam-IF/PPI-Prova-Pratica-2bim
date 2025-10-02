@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if editar %}
+<h1>Editar Usuário</h1>
+{% else %}
+<h1>Cadastrar Usuário</h1>
+{% endif %}
+
+<form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.username.label }} <br/>
+        {{ form.username(size=32) }} <br/>
+        {% for error in form.username.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.email.label }} <br/>
+        {{ form.email(size=32) }} <br/>
+        {% for error in form.email.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.password.label }} <br/>
+        {{ form.password(placeholder="Mínimo de 6 caracteres", size=32, minlength=6) }} <br/>
+        {% for error in form.password.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.password2.label }} <br/>
+        {{ form.password2(placeholder="Repita a senha", size=32, minlength=6) }} <br/>
+        {% for error in form.password2.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    
+    <p>{{ form.submit() }}</p>
+</form>
+{% endblock %}

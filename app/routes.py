@@ -1,7 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, flash
 from app import app, db
-from app.forms import TimeForm, JogadorForm, TreinadorForm, CompeticaoForm, JogoForm
-from app.controllers import CompeticaoController, TreinadorController, TimeController, JogadorController, JogoController, ClassificacaoController
+from app.forms import TimeForm, JogadorForm, TreinadorForm, CompeticaoForm, JogoForm, UsuarioForm, LoginForm
+from app.controllers import CompeticaoController, TreinadorController, TimeController, JogadorController, JogoController, ClassificacaoController, UsuarioController
 
 
 @app.route('/')
@@ -248,3 +248,19 @@ def classificacao():
     '''
     placar = ClassificacaoController.recuperar_informacoes_classificacao()
     return render_template('classificacao/index.html', placar=placar)
+
+# Usuários e afins
+@app.route('/cadastrar', methods=['GET','POST'])
+def cadastrar_usuario():
+    formulario = UsuarioForm()
+    if formulario.validate_on_submit():
+        sucesso = UsuarioController.salvar(formulario)
+        if sucesso:
+            print('SUCESSO NO CADASTRO')
+            flash("Usuario cadastrado com sucesso!", category="success")
+            return redirect(url_for("index"))
+        else:
+            print('ERRO NO CADASTRO')
+            flash("Erro ao cadastrar novo usuário.", category="error")
+            return render_template("usuario/cadastro.html", form = formulario)
+    return render_template('usuario/cadastro.html', titulo='Cadastro de Usuario', form = formulario)
