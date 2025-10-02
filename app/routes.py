@@ -1,7 +1,7 @@
-from flask import Flask, render_template, redirect, url_for, flash
+from flask import Flask, render_template, redirect, url_for, flash, request
 from app import app, db
 from app.forms import TimeForm, JogadorForm, TreinadorForm, CompeticaoForm, JogoForm, UsuarioForm, LoginForm
-from app.controllers import CompeticaoController, TreinadorController, TimeController, JogadorController, JogoController, ClassificacaoController, UsuarioController
+from app.controllers import CompeticaoController, TreinadorController, TimeController, JogadorController, JogoController, ClassificacaoController, UsuarioController, AuthenticationController
 
 
 @app.route('/')
@@ -264,3 +264,17 @@ def cadastrar_usuario():
             flash("Erro ao cadastrar novo usuário.", category="error")
             return render_template("usuario/cadastro.html", form = formulario)
     return render_template('usuario/cadastro.html', titulo='Cadastro de Usuario', form = formulario)
+
+@app.route('/login', methods=['GET','POST'])
+def login_usuario():
+    formulario = LoginForm()
+    if formulario.validate_on_submit():
+        if AuthenticationController.login(formulario):
+            flash("Login realizado com sucesso!", "success")
+            next_page = request.args.get('next')
+            if not next_page:
+                next_page = url_for('index')
+            return redirect(next_page)
+        else:
+            flash("Usuário ou senha inválidos.", "error")
+    return render_template('usuario/login.html', title='Login', form = formulario)
